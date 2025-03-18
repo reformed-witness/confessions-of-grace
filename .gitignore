@@ -35,3 +35,19 @@ next-env.d.ts
 # IDE
 .idea/
 .vscode/
+
+# logs
+logs
+*.log
+logs/**/*.log
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# firebase
+.firebase/
+.firebaserc
+firebase.json
+firebase-debug.log
