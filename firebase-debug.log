@@ -1,0 +1,156 @@
+[debug] [2025-03-18T20:05:33.847Z] ----------------------------------------------------------------------
+[debug] [2025-03-18T20:05:33.849Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Austin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-18T20:05:33.849Z] CLI Version:   13.34.0
+[debug] [2025-03-18T20:05:33.849Z] Platform:      win32
+[debug] [2025-03-18T20:05:33.850Z] Node Version:  v22.14.0
+[debug] [2025-03-18T20:05:33.850Z] Time:          Tue Mar 18 2025 15:05:33 GMT-0500 (Central Daylight Time)
+[debug] [2025-03-18T20:05:33.850Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-18T20:05:33.853Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-03-18T20:05:33.882Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-18T20:05:33.882Z] > authorizing via signed-in user (austinthebennett@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Austin\Documents\confessions-of-grace
+
+[debug] [2025-03-18T20:05:34.924Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-03-18T20:05:34.924Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-18T20:05:43.813Z] Checked if tokens are valid: false, expires at: 1742058678460
+[debug] [2025-03-18T20:05:43.813Z] Checked if tokens are valid: false, expires at: 1742058678460
+[debug] [2025-03-18T20:05:43.813Z] > refreshing access token with scopes: []
+[debug] [2025-03-18T20:05:43.814Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-03-18T20:05:43.814Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-18T20:05:43.974Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-03-18T20:05:43.974Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-18T20:05:43.980Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-03-18T20:05:44.282Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-03-18T20:05:44.282Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project confessions-of-grace (confessions-of-grace) 
+[info] 
+=== Hosting Setup
+[debug] [2025-03-18T20:05:45.777Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:05:45.777Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:05:45.777Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace [none]
+[debug] [2025-03-18T20:05:45.895Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace 200
+[debug] [2025-03-18T20:05:45.895Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace {"projectId":"confessions-of-grace","projectNumber":"545148895351","displayName":"confessions-of-grace","name":"projects/confessions-of-grace","resources":{"hostingSite":"confessions-of-grace"},"state":"ACTIVE","etag":"1_8cba48cb-7559-4859-82ed-0459928e3a23"}
+[info] 
+[info] i  Didn't detect a .git folder. Assuming C:\Users\Austin\Documents\confessions-of-grace is the project root. 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=50711215&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2025-03-18T20:06:26.585Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2025-03-18T20:06:26.585Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2025-03-18T20:06:26.815Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2025-03-18T20:06:26.815Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2025-03-18T20:06:26.818Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2025-03-18T20:06:27.119Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2025-03-18T20:06:27.119Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"auggie2lbcf","id":157770486,"node_id":"U_kgDOCWdi9g","avatar_url":"https://avatars.githubusercontent.com/u/157770486?v=4","gravatar_id":"","url":"https://api.github.com/users/auggie2lbcf","html_url":"https://github.com/auggie2lbcf","followers_url":"https://api.github.com/users/auggie2lbcf/followers","following_url":"https://api.github.com/users/auggie2lbcf/following{/other_user}","gists_url":"https://api.github.com/users/auggie2lbcf/gists{/gist_id}","starred_url":"https://api.github.com/users/auggie2lbcf/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/auggie2lbcf/subscriptions","organizations_url":"https://api.github.com/users/auggie2lbcf/orgs","repos_url":"https://api.github.com/users/auggie2lbcf/repos","events_url":"https://api.github.com/users/auggie2lbcf/events{/privacy}","received_events_url":"https://api.github.com/users/auggie2lbcf/received_events","type":"User","user_view_type":"private","site_admin":false,"name":"Auggie","company":null,"blog":"thebennett.net","location":null,"email":null,"hireable":true,"bio":null,"twitter_username":"auggie2lbcf","notification_email":null,"public_repos":17,"public_gists":0,"followers":0,"following":3,"created_at":"2024-01-26T01:41:43Z","updated_at":"2025-03-18T19:22:54Z","private_gists":0,"total_private_repos":4,"owned_private_repos":4,"disk_usage":242961,"collaborators":0,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as auggie2lbcf 
+[info] 
+[debug] [2025-03-18T20:06:37.568Z] >>> [apiv2][query] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key type=owner
+[debug] [2025-03-18T20:06:37.719Z] <<< [apiv2][status] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key 404
+[debug] [2025-03-18T20:06:37.719Z] <<< [apiv2][body] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2025-03-18T20:06:48.785Z] >>> [apiv2][query] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key type=owner
+[debug] [2025-03-18T20:06:48.942Z] <<< [apiv2][status] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key 404
+[debug] [2025-03-18T20:06:48.943Z] <<< [apiv2][body] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2025-03-18T20:06:56.039Z] ----------------------------------------------------------------------
+[debug] [2025-03-18T20:06:56.041Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Austin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-18T20:06:56.041Z] CLI Version:   13.34.0
+[debug] [2025-03-18T20:06:56.041Z] Platform:      win32
+[debug] [2025-03-18T20:06:56.041Z] Node Version:  v22.14.0
+[debug] [2025-03-18T20:06:56.041Z] Time:          Tue Mar 18 2025 15:06:56 GMT-0500 (Central Daylight Time)
+[debug] [2025-03-18T20:06:56.041Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-18T20:06:56.045Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-18T20:06:56.046Z] > authorizing via signed-in user (austinthebennett@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Austin\Documents\confessions-of-grace
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-18T20:07:01.993Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:07:01.993Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:07:01.994Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-03-18T20:07:02.241Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-03-18T20:07:02.242Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project confessions-of-grace (confessions-of-grace) 
+[info] 
+=== Hosting Setup
+[debug] [2025-03-18T20:07:03.837Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:07:03.837Z] Checked if tokens are valid: true, expires at: 1742331942974
+[debug] [2025-03-18T20:07:03.837Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace [none]
+[debug] [2025-03-18T20:07:03.957Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace 200
+[debug] [2025-03-18T20:07:03.957Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/confessions-of-grace {"projectId":"confessions-of-grace","projectNumber":"545148895351","displayName":"confessions-of-grace","name":"projects/confessions-of-grace","resources":{"hostingSite":"confessions-of-grace"},"state":"ACTIVE","etag":"1_8cba48cb-7559-4859-82ed-0459928e3a23"}
+[info] 
+[info] i  Didn't detect a .git folder. Assuming C:\Users\Austin\Documents\confessions-of-grace is the project root. 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=533693003&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2025-03-18T20:07:16.492Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2025-03-18T20:07:16.492Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2025-03-18T20:07:16.689Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2025-03-18T20:07:16.689Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2025-03-18T20:07:16.692Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2025-03-18T20:07:16.976Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2025-03-18T20:07:16.976Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"auggie2lbcf","id":157770486,"node_id":"U_kgDOCWdi9g","avatar_url":"https://avatars.githubusercontent.com/u/157770486?v=4","gravatar_id":"","url":"https://api.github.com/users/auggie2lbcf","html_url":"https://github.com/auggie2lbcf","followers_url":"https://api.github.com/users/auggie2lbcf/followers","following_url":"https://api.github.com/users/auggie2lbcf/following{/other_user}","gists_url":"https://api.github.com/users/auggie2lbcf/gists{/gist_id}","starred_url":"https://api.github.com/users/auggie2lbcf/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/auggie2lbcf/subscriptions","organizations_url":"https://api.github.com/users/auggie2lbcf/orgs","repos_url":"https://api.github.com/users/auggie2lbcf/repos","events_url":"https://api.github.com/users/auggie2lbcf/events{/privacy}","received_events_url":"https://api.github.com/users/auggie2lbcf/received_events","type":"User","user_view_type":"private","site_admin":false,"name":"Auggie","company":null,"blog":"thebennett.net","location":null,"email":null,"hireable":true,"bio":null,"twitter_username":"auggie2lbcf","notification_email":null,"public_repos":17,"public_gists":0,"followers":0,"following":3,"created_at":"2024-01-26T01:41:43Z","updated_at":"2025-03-18T19:22:54Z","private_gists":0,"total_private_repos":4,"owned_private_repos":4,"disk_usage":242961,"collaborators":0,"two_factor_authentication":true,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as auggie2lbcf 
+[info] 
+[debug] [2025-03-18T20:07:29.570Z] >>> [apiv2][query] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key type=owner
+[debug] [2025-03-18T20:07:29.729Z] <<< [apiv2][status] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key 404
+[debug] [2025-03-18T20:07:29.730Z] <<< [apiv2][body] GET https://api.github.com/repos/auggie2lbcf/confessionofgrace/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key","status":"404"}
+[info] 
+[info] 
+[error] !  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
