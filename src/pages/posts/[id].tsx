@@ -98,7 +98,7 @@ const Post: React.FC<PostProps> = ({ post, morePosts }) => {
           </div>
         </div>
         
-        <CommentSection postId={post.id} />
+        {/* <CommentSection postId={post.id} /> */}
         
         <div className="mt-12 pt-6 border-t border-primary-200">
           <Link href="/" className="text-accent-dark hover:text-accent inline-flex items-center">
