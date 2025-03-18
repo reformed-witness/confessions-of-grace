@@ -11,29 +11,29 @@ interface Resource {
 
 const Resources: React.FC = () => {
   const resources: Resource[] = [
+    // {
+    //   title: "Institutes of the Christian Religion",
+    //   author: "John Calvin",
+    //   description: "Calvin's magnum opus on systematic theology, covering the doctrines of God, man, salvation, and the church.",
+    //   category: "Books"
+    // },
+    // {
+    //   title: "The Bondage of the Will",
+    //   author: "Martin Luther",
+    //   description: "Luther's defense of the doctrine of total depravity and God's sovereignty in salvation.",
+    //   category: "Books"
+    // },
+    // {
+    //   title: "Chosen by God",
+    //   author: "R.C. Sproul",
+    //   description: "An accessible introduction to the doctrine of predestination.",
+    //   category: "Books"
+    // },
     {
-      title: "Institutes of the Christian Religion",
-      author: "John Calvin",
-      description: "Calvin's magnum opus on systematic theology, covering the doctrines of God, man, salvation, and the church.",
-      category: "Books"
-    },
-    {
-      title: "The Bondage of the Will",
-      author: "Martin Luther",
-      description: "Luther's defense of the doctrine of total depravity and God's sovereignty in salvation.",
-      category: "Books"
-    },
-    {
-      title: "Chosen by God",
-      author: "R.C. Sproul",
-      description: "A accessible introduction to the doctrine of predestination.",
-      category: "Books"
-    },
-    {
-      title: "The Westminster Confession of Faith",
-      author: "Westminster Assembly",
-      description: "A historic Reformed confession of faith that remains influential today.",
-      link: "https://www.pcaac.org/bco/westminster-confession/",
+      title: "The Second London Baptist Confession of Faith (1689)",
+      author: "Particular Baptists",
+      description: "A historic Reformed Baptist confession of faith that aligns closely with the Westminster Confession but reflects Baptist distinctives.",
+      link: "https://www.the1689confession.com/",
       category: "Confessions"
     },
     {
@@ -110,7 +110,7 @@ const categories = Array.from(new Set(resources.map(resource => resource.categor
           </div>
         ))}
         
-        <div className="bg-primary-100 rounded-lg p-6 border border-primary-200 mt-10">
+        {/* <div className="bg-primary-100 rounded-lg p-6 border border-primary-200 mt-10">
           <h2 className="text-xl font-bold mb-4">Suggest a Resource</h2>
           <p className="text-primary-700 mb-4">
             Do you have a resource suggestion that would be valuable for readers of this blog?
@@ -119,7 +119,7 @@ const categories = Array.from(new Set(resources.map(resource => resource.categor
           <a href="#" className="button inline-block">
             Contact
           </a>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );
