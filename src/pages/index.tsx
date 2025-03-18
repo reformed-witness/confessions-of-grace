@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
             <div className="mb-12">
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="md:flex">
-                  <div className="md:flex-shrink-0 bg-accent relative w-full md:w-64 h-64">
+                  <div className="md:flex-shrink-0 bg-accent relative w-full md:w-1/3 h-64 md:h-auto">
                     {posts[0].coverImage ? (
                       <img
                         src={posts[0].coverImage}
