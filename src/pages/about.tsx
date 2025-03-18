@@ -55,11 +55,12 @@ const About: React.FC = () => {
               </div>
             </div>
             <div className="md:w-2/3">
-              <p className="text-primary-700 mb-4">
-                [Insert author bio here. Share your background, education, ministry experience, 
-                and what led you to start this blog. Discuss your passion for Reformed theology 
-                and your goals for this website.]
-              </p>
+                <p className="text-primary-700 mb-4">
+                I studied Computer Science, which has given me a deep appreciation for logic and structure, 
+                qualities that I also find in Reformed theology. I am a member of Covenant Community Church, 
+                where I have been blessed to grow in faith and fellowship. My passion for theology and 
+                technology inspired me to start this blog as a way to share the beauty of God's sovereign grace.
+                </p>
               <p className="text-primary-700">
                 Feel free to reach out through the contact form or connect on social media.
               </p>
