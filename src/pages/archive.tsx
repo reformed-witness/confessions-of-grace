@@ -41,22 +41,22 @@ const Archive: React.FC<ArchiveProps> = ({ posts, years }) => {
                         </div>
                         <p className="text-primary-600">{post.excerpt}</p>
                       </div>
-                      <div className="mt-4 md:mt-0">
-                        <Link href={`/posts/${post.id}`} className="button text-sm">
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-4 items-center">
+                      {post.tags.map(tag => (
+                      <Link 
+                      key={tag} 
+                      href={`/tags/${tag}`}
+                      className="text-sm bg-primary-100 text-primary-600 px-3 py-1 rounded-md hover:bg-primary-200"
+                      >
+                      {tag}
+                      </Link>
+                      ))}
+                      <div className="mt-4 md:mt-0 md:self-end md:ml-auto flex justify-end">
+                        <Link href={`/posts/${post.id}`} className="text-sm bg-accent text-white px-3 py-1 rounded-md hover:bg-accent-dark">
                           Read post
                         </Link>
                       </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {post.tags.map(tag => (
-                        <Link 
-                          key={tag} 
-                          href={`/tags/${tag}`}
-                          className="text-xs bg-primary-100 text-primary-600 px-2 py-1 rounded-md hover:bg-primary-200"
-                        >
-                          {tag}
-                        </Link>
-                      ))}
                     </div>
                   </li>
                 ))}
