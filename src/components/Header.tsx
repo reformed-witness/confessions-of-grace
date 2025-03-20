@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
@@ -21,6 +21,9 @@ const Header: React.FC = () => {
             </Link>
             <Link href="/archive" className="text-primary-700 hover:text-accent-dark">
               Archive
+            </Link>
+            <Link href="/confession" className="text-primary-700 hover:text-accent-dark">
+              1689 Confession
             </Link>
             <Link href="/resources" className="text-primary-700 hover:text-accent-dark">
               Resources
