@@ -59,7 +59,7 @@ const About: React.FC = () => {
         <div className="bg-white rounded-lg shadow-sm p-8 border border-primary-200">
           <h2 className="text-2xl font-bold mb-4">About the Author</h2>
           <div className="md:flex items-start gap-6">
-            <div className="md:w-1/3 mb-4 md:mb-0">
+            {/* <div className="md:w-1/3 mb-4 md:mb-0">
               <div className="bg-primary-200 h-64 w-full rounded-md mb-4 relative h-48 w-full overflow-hidden rounded-md">
                 <Image
                   src="/images/me.jpeg"
@@ -68,7 +68,7 @@ const About: React.FC = () => {
                   className="object-cover"
                 />
               </div>
-            </div>
+            </div> */}
             <div className="md:w-2/3">
               <p className="text-primary-700 mb-4">
                 My wife and I are members of Covenant Community Church,
