@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,6 +32,7 @@ const Layout: React.FC<LayoutProps> = ({
         <Footer />
       </div>
       <Analytics />
+      <SpeedInsights/>
     </html>
   );
 };
