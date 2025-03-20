@@ -77,7 +77,8 @@ const About: React.FC = () => {
                 I hope to one day reach unreached people groups and share the gospel with them.
               </p>
               <p className="text-primary-700">
-                Feel free to connect with me on social media. If you are a brand, I only collaborate with Bubbl'r.
+                Feel free to connect with me on X @auggie2lbcf or email me at contact@confessionsofgrace.com.
+                I would love to hear from you and learn how I can serve you better.
               </p>
             </div>
           </div>
