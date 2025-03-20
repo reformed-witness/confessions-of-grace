@@ -5,6 +5,7 @@ import PostCard from '@/components/PostCard';
 import Sidebar from '@/components/Sidebar';
 import { getSortedPostsData } from '@/lib/markdown';
 import { PostMetadata } from '@/types';
+import Image from 'next/image'
 
 interface HomeProps {
   posts: PostMetadata[];
@@ -37,10 +38,12 @@ const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
                 <div className="md:flex">
                   <div className="md:flex-shrink-0 bg-accent relative w-full md:w-1/3 h-64 md:h-auto">
                     {posts[0].coverImage ? (
-                      <img
+                      <Image
                         src={posts[0].coverImage}
                         alt={posts[0].title}
                         className="h-full w-full object-cover"
+                        width={1000}
+                        height={1000}
                       />
                     ) : (
                       <div className="h-full w-full flex items-center justify-center bg-accent text-white text-6xl font-bold">
