@@ -1,14 +1,13 @@
-import React from 'react';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { format } from 'date-fns';
 import Layout from '@/components/Layout';
 import Meta from '@/components/Meta';
 import ShareButtons from '@/components/ShareButtons';
-import CommentSection from '@/components/CommentSection';
 import { getAllPostIds, getPostData, getSortedPostsData } from '@/lib/markdown';
 import { PostData, PostMetadata } from '@/types';
+import { format } from 'date-fns';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 interface PostProps {
   post: PostData;

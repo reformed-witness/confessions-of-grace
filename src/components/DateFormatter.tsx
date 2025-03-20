@@ -1,5 +1,5 @@
-import React from 'react';
 import { format, parseISO } from 'date-fns';
+import React from 'react';
 
 interface DateFormatterProps {
   dateString: string;
