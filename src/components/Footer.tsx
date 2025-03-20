@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -30,6 +30,11 @@ const Footer: React.FC = () => {
               <li>
                 <Link href="/archive" className="text-primary-300 hover:text-white">
                   Archive
+                </Link>
+              </li>
+              <li>
+                <Link href="/confession" className="text-primary-300 hover:text-white">
+                  1689 Confession
                 </Link>
               </li>
               <li>

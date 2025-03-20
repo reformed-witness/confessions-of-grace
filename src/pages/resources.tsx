@@ -33,7 +33,7 @@ const Resources: React.FC = () => {
       title: "The Second London Baptist Confession of Faith (1689)",
       author: "Particular Baptists",
       description: "A historic Reformed Baptist confession of faith that aligns closely with the Westminster Confession but reflects Baptist distinctives.",
-      link: "https://www.the1689confession.com/",
+      link: "/confession",
       category: "Confessions"
     },
     {
