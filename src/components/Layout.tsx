@@ -2,8 +2,8 @@ import Head from 'next/head';
 import React, { ReactNode } from 'react';
 import Footer from './Footer';
 import Header from './Header';
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({
   description = 'A blog dedicated to exploring the doctrines of grace and Reformed theology.'
 }) => {
   return (
-    <html lang="en">
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -32,8 +32,8 @@ const Layout: React.FC<LayoutProps> = ({
         <Footer />
       </div>
       <Analytics />
-      <SpeedInsights/>
-    </html>
+      <SpeedInsights />
+    </>
   );
 };
 
