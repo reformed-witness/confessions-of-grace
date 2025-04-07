@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import SubscribeForm from './SubscribeForm'; // Import the reusable SubscribeForm
+import TagList from './TagList';
+import SubscribeForm from "@/components/SubscribeForm";
 
 interface SidebarProps {
   recentPosts: Array<{
@@ -39,7 +40,34 @@ const Sidebar: React.FC<SidebarProps> = ({ recentPosts, tags = [] }) => {
           </Link>
         </div>
 
-        {/* Subscribe section */}
+        <div className="bg-white rounded-md shadow-sm p-6 border border-primary-200">
+          <h2 className="text-xl font-bold mb-4 border-b border-primary-200 pb-2">Recent Posts</h2>
+          <ul className="space-y-3">
+            {recentPosts.map(post => (
+                <li key={post.id}>
+                  <Link
+                      href={`/posts/${post.id}`}
+                      className="hover:text-accent-dark block"
+                  >
+                    <h3 className="font-medium">{post.title}</h3>
+                    <p className="text-sm text-primary-500">
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  </Link>
+                </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="bg-white rounded-md shadow-sm p-6 border border-primary-200">
+          <h2 className="text-xl font-bold mb-4 border-b border-primary-200 pb-2">Popular Tags</h2>
+          <TagList limit={15} tags={tags} />
+        </div>
+
         <div className="bg-white rounded-md shadow-sm p-6 border border-primary-200">
           <h2 className="text-xl font-bold mb-4 border-b border-primary-200 pb-2">Subscribe</h2>
           <p className="text-primary-700 mb-4">
