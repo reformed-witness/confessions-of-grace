@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({
   description = 'A blog dedicated to exploring the doctrines of grace and Reformed theology.'
 }) => {
   return (
-    <html lang="en">
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({
       </div>
       <Analytics />
       <SpeedInsights/>
-    </html>
+    </>
   );
 };
 
