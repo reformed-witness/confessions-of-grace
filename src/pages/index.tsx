@@ -23,13 +23,6 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
   return (
     <Layout>
-      <div className="mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Confessions of Grace</h1>
-        <p className="text-xl text-primary-600 max-w-2xl mx-auto">
-          Exploring the doctrines of grace and the richness of Reformed theology.
-        </p>
-      </div>
-      
       <div className="flex flex-col md:flex-row gap-8">
         <main className="md:w-2/3">
           {posts.length > 0 && (
