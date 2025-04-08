@@ -109,6 +109,10 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-2 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
               required
+              onFocus={() => {
+          const savedName = localStorage.getItem('name');
+          if (savedName) setName(savedName);
+              }}
             />
           </div>
           <div>
@@ -122,6 +126,10 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
               required
+              onFocus={() => {
+          const savedEmail = localStorage.getItem('email');
+          if (savedEmail) setEmail(savedEmail);
+              }}
             />
           </div>
         </div>
@@ -145,6 +153,18 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
             type="checkbox"
             id="save-info"
             className="h-4 w-4 text-accent border-primary-300 rounded focus:ring-accent"
+            checked={localStorage.getItem('saveInfo') === 'true'}
+            onChange={(e) => {
+              const saveInfo = e.target.checked;
+              localStorage.setItem('saveInfo', saveInfo.toString());
+              if (saveInfo) {
+          localStorage.setItem('name', name);
+          localStorage.setItem('email', email);
+              } else {
+          localStorage.removeItem('name');
+          localStorage.removeItem('email');
+              }
+            }}
           />
           <label htmlFor="save-info" className="ml-2 block text-sm text-primary-600">
             Save my name and email for the next time I comment
