@@ -14,32 +14,37 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!name.trim() || !email.trim() || !comment.trim()) {
       setError('All fields are required');
       return;
     }
-    
+
     setIsSubmitting(true);
     setError(null);
-    
+
     try {
-      // In a real implementation, you would send this data to your API
-      // For now, we'll just simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Clear form and show success message
-      setName('');
-      setEmail('');
-      setComment('');
-      setIsSubmitted(true);
-      setIsSubmitting(false);
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, comment, postId }),
+      });
+
+      if (response.ok) {
+        setName('');
+        setEmail('');
+        setComment('');
+        setIsSubmitted(true);
+        setIsSubmitting(false);
+
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        const data = await response.json();
+        setError(data.message || 'Something went wrong. Please try again later.');
+        setIsSubmitting(false);
+      }
     } catch (err) {
       setError('Something went wrong. Please try again later.');
       setIsSubmitting(false);
