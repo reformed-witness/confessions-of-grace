@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'your-mongodb-uri'; // Replace with your MongoDB URI
-const dbName = 'your-database-name'; // Replace with your database name
+const uri = process.env.MONGODB_URI || 'dontstealmyuri';
+const dbName = 'comments';
 
 const client = new MongoClient(uri);
 
