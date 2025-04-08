@@ -152,7 +152,7 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
           ></textarea>
         </div>
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             id="save-info"
@@ -175,7 +175,7 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
           <label htmlFor="save-info" className="ml-2 block text-sm text-primary-600">
             Save my name and email for the next time I comment
           </label>
-        </div>
+        </div> */}
 
         <button
           type="submit"
