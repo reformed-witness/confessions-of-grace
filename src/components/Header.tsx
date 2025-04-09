@@ -22,9 +22,9 @@ const Header: React.FC = () => {
             <Link href="/archive" className="text-primary-700 hover:text-accent-dark">
               Archive
             </Link>
-            <Link href="/confession" className="text-primary-700 hover:text-accent-dark">
-              1689 Confession
-            </Link>
+            {/*<Link href="/confession" className="text-primary-700 hover:text-accent-dark">*/}
+            {/*  1689 Confession*/}
+            {/*</Link>*/}
             <Link href="/resources" className="text-primary-700 hover:text-accent-dark">
               Resources
             </Link>
