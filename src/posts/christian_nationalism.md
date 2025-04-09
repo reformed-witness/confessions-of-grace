@@ -2,7 +2,7 @@
 title: "Against Ethnocentric Christian Nationalism"
 date: "2025-04-05"
 author: "@Auggie2LBCF"
-excerpt: "while Christian principles have historically informed public life within Reformed traditions, Reformed theology itself, grounded in doctrines like the Imago Dei, the universal scope of redemption, and the nature of the Church, stands in opposition to ethnocentric expressions of Christian Nationalism.",
+excerpt: "While Christian principles have historically informed public life within Reformed traditions, Reformed theology itself, grounded in doctrines like the Imago Dei, the universal scope of redemption, and the nature of the Church, stands in opposition to ethnocentric expressions of Christian Nationalism."
 tags: ["christianity", "nationalism", "theology", "ethics", "identity", "political philosophy", "church and state"]
 coverImage: "/images/templar.jpeg"
 ---
