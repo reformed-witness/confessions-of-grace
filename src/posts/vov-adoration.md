@@ -3,30 +3,28 @@ title: "Valley of Vision - Part 1: Adoration"
 date: "2025-04-11"
 author: "@Auggie2LBCF"
 excerpt: "asdf"
-tags: ["the valley of vision", "prayer", "puritian", "adoration"]
+\tags: ["the valley of vision", "prayer", "puritans", "adoration"]
 coverImage: "/images/valley-of-vision.png"
 ---
 
-**Series Introduction**
+# Series Introduction
+The Valley of Vision, edited by Arthur Bennett and published in 1975, is a compilation of Puritan prayers and devotions. 
+Bennett intended it not as a static manual, but as a catalyst for active communion with God, 
+emphasizing that prayer is learned through practice. This deep engagement involves adoration and dedication, 
+with the collected prayers designed as "aspiration units" to inspire the reader's own communication with God.
 
-1. Subtitle as Isaiah 22:1 - *The Burden of the Valley of Vision*
-    1. Isaiah uses this a cruel irony. Mount Zion, where God can be seen most clearly has become a valley, and yet still has vision, Israel has oppurunity to see and to respond to God.
-    2. So what is the Burden that Bennett refers to?
-        1. The weight of something that is overwhelming to us
-        2. this is the weight we should feel in prayer
-        3. Thomas Watson in https://www.monergism.com/body-divinity-ebook
-            1.
-2. Adoration, Confession, Thanksgiving, Supplication
+This analysis will explore The Valley of Vision through the structural lens provided by Matthew Henry’s work, 
+A Method for Prayer. Henry's framework organizes prayer into Adoration, Confession, Thanksgiving, Petition, and Intercession. 
+Using this method, the series will examine the devotional content within The Valley of Vision. 
+This initial installment begins the five-part series by focusing specifically on the theology of Adoration expressed in the collection.
+# Introduction - Adoration
 
-**Introduction**
 
-1. The Valley of Vision
-    1. Compiled by Arthur Bennett
-2. Who Was compiled
-3. Preface
-   The book is not intended to be read as a prayer manual. The soul learns
-   to pray by praying; for prayer is communion with a transcendent and
-   immanent God who on the ground of his nature and attributes calls forth
-   all the powers of the redeemed soul in acts of total addoration and
-   dedication. The prayers should therefore be used as **aspiration units**, the several parts of which could become springboards for the individual's own prayer subjects.
-4. How does theses men’s view of God affect their adoration
+
+# Valley Of Vision
+
+## Trinitarion
+
+## Perfection
+
+# Conclusion
