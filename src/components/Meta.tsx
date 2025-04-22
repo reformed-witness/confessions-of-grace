@@ -30,6 +30,7 @@ const Meta: React.FC<MetaProps> = ({
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
       
+      
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
@@ -38,8 +39,9 @@ const Meta: React.FC<MetaProps> = ({
       <meta property="og:image" content={image} />
       <meta property="og:locale" content="your value" />
       <meta property="og:logo" content="your value" />
+      <meta property="og:locale" content="" />
+      <meta property="og:logo" content="" />
         
-
       {/* Twitter */}
       <meta property="twitter:card" content={image} />
       <meta property="twitter:url" content={url} />

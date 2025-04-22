@@ -26,7 +26,6 @@ const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
     <Layout>
       <Meta
         title="Confessions of Grace"
-        description="Reformed Theology Blog"
         keywords="reformed theology, doctrines of grace, christianity, calvinism, theology"
         image="public/favicon.ico"
         url="https://www.confessionsofgrace.com/"
