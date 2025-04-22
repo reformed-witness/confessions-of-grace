@@ -39,7 +39,7 @@ const Meta: React.FC<MetaProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:locale" content="en_US" />
-      <meta property="og:logo" content="" />
+      <meta property="og:logo" content="/favicon.ico" />
         
       {/* Twitter */}
       <meta property="twitter:card" content="summary" />
