@@ -31,18 +31,6 @@ const Post: React.FC<PostProps> = ({ post, morePosts }) => {
         url={postUrl}
         type="article"
       />
-      {/* Open Graph / Facebook */}
-      <meta property="og:url" content={postUrl} />
-      <meta property="og:title" content={post.title} />
-      <meta property="og:description" content={post.excerpt} />
-      <meta property="og:image" content={post.coverImage} />
-
-      {/* Twitter */}
-      <meta property="twitter:card" content={post.coverImage} />
-      <meta property="twitter:url" content={postUrl} />
-      <meta property="twitter:title" content={post.title} />
-      <meta property="twitter:description" content={post.excerpt} />
-      <meta property="twitter:image" content={post.coverImage} />
       
       <article className="max-w-3xl mx-auto">
         <header className="mb-8">

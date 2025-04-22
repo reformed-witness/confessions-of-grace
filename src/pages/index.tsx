@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import { getSortedPostsData } from '@/lib/markdown';
 import { PostMetadata } from '@/types';
 import Image from 'next/image'
+import Meta from '@/components/Meta';
 
 interface HomeProps {
   posts: PostMetadata[];
@@ -23,6 +24,14 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
   return (
     <Layout>
+      <Meta
+        title="Confessions of Grace"
+        description="Reformed Theology Blog"
+        keywords="reformed theology, doctrines of grace, christianity, calvinism, theology"
+        image="public/favicon.ico"
+        url="https://www.confessionsofgrace.com/"
+        type="homepage"
+      />
       <div className="flex flex-col md:flex-row gap-8">
         <main className="md:w-2/3">
           {posts.length > 0 && (
