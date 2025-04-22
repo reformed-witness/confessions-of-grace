@@ -22,6 +22,7 @@ const Meta: React.FC<MetaProps> = ({
     ? 'Confessions of Grace | Reformed Theology Blog' 
     : `${title} | Confessions of Grace`;
 
+  image = image.startsWith('http') ? image : `https://www.confessionsofgrace.com${image}`;
   return (
     <Head>
       <title>{siteTitle}</title>
@@ -45,7 +46,7 @@ const Meta: React.FC<MetaProps> = ({
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={siteTitle} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content="https://www.confessionsofgrace.com/{image}" />
+      <meta property="twitter:image" content={image} />
     </Head>
   );
 };
