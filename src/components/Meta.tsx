@@ -36,9 +36,12 @@ const Meta: React.FC<MetaProps> = ({
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:locale" content="your value" />
+      <meta property="og:logo" content="your value" />
+        
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:card" content={image} />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={siteTitle} />
       <meta property="twitter:description" content={description} />
