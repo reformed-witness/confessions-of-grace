@@ -29,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ posts, recentPosts, tags }) => {
         keywords="reformed theology, doctrines of grace, christianity, calvinism, theology"
         image="public/favicon.ico"
         url="https://www.confessionsofgrace.com/"
-        type="homepage"
+        type="website"
       />
       <div className="flex flex-col md:flex-row gap-8">
         <main className="md:w-2/3">
