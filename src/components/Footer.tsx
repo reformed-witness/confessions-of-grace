@@ -43,6 +43,11 @@ const Footer: React.FC = () => {
                     Resources
                   </Link>
                 </li>
+                <li>
+                  <Link href="https://www.etsy.com/shop/ConfessionsOfGrace" className="text-primary-700 hover:text-accent-dark">
+                    Shop
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

@@ -42,6 +42,9 @@ const Header: React.FC = () => {
             <Link href="/resources" className="text-primary-700 hover:text-accent-dark">
               Resources
             </Link>
+            <Link href="https://www.etsy.com/shop/ConfessionsOfGrace" className="text-primary-700 hover:text-accent-dark">
+              Shop
+            </Link>
           </nav>
         </div>
       </div>
