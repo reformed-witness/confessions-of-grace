@@ -19,7 +19,7 @@ const Meta: React.FC<MetaProps> = ({
   type = 'website'
 }) => {
   const siteTitle = title === 'Confessions of Grace' 
-    ? 'Confessions of Grace | Reformed Theology Blog' 
+    ? 'Confessions of Grace | Confessing Christ. Rejoicing in Grace.' 
     : `${title} | Confessions of Grace`;
 
   image = image.startsWith('http') ? image : `https://www.confessionsofgrace.com${image}`;
@@ -39,7 +39,7 @@ const Meta: React.FC<MetaProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:locale" content="en_US" />
-      <meta property="og:logo" content="/favicon.ico" />
+      <meta property="og:logo" content="/logo.svg" />
         
       {/* Twitter */}
       <meta property="twitter:card" content="summary" />

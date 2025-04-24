@@ -1,17 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from "next/image";
 
 const Header: React.FC = () => {
   return (
     <header className="bg-white shadow-sm border-b border-primary-200">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <Link href="/" className="no-underline">
+          <Link href="/" className="no-underline">
+            <div className="mb-4 md:mb-0 flex items-center space-x-4">
+            
+              <Image
+              src="/assets/logo.svg"
+              alt="Logo"
+              width={100}
+              height={100}
+              className="h-auto w-auto max-h-12"
+              />
+            
+            <div>
+              
               <h1 className="text-3xl font-bold text-primary-900 mb-0">Confessions of Grace</h1>
-            </Link>
-            <p className="text-primary-500 italic text-sm">Exploring Reformed Theology</p>
-          </div>
+              
+              <p className="text-primary-500 italic text-sm">Confessing Christ. Rejoicing in Grace.</p>
+            </div>
+            </div>
+          </Link>
           <nav className="flex space-x-6">
             <Link href="/" className="text-primary-700 hover:text-accent-dark">
               Home
