@@ -20,6 +20,7 @@ This initial installment begins the five-part series by focusing specifically on
 # Introduction - Adoration
 > “We must begin our prayers with the solemn adoration of God, lifting up our hearts unto Him, as to a Father in heaven, infinitely above us and over all.”
 
+
 The act of acknowledging and reverently declaring God's infinite perfections—His holiness, power, wisdom, and majesty—with love, awe, and submission.
 
 
