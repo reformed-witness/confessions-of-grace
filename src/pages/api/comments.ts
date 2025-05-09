@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
+export const runtime = 'edge';
 const uri = process.env.MONGODB_URI || 'your-mongodb-uri';
 const dbName = 'confessions-of-grace';
 
