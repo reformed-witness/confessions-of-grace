@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// MongoDB connection URI and database constants
+export const runtime = 'edge';
 const MONGODB_URI = process.env.MONGODB_URI as string; // Add this in your .env.local file
 const MONGODB_DB = process.env.MONGODB_DB as string;   // Add this in your .env.local file
 
