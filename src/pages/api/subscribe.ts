@@ -3,8 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export const runtime = 'edge';
 const MONGODB_URI = process.env.MONGODB_URI as string; // Add this in your .env.local file
-const MONGODB_DB = process.env.MONGODB_DB as string;   // Add this in your .env.local file
-
 // Create a MongoClient instance
 let cachedClient: MongoClient | null = null;
 
@@ -13,7 +11,7 @@ async function connectToDatabase() {
         cachedClient = new MongoClient(MONGODB_URI);
         await cachedClient.connect();
     }
-    return cachedClient.db(MONGODB_DB);
+    return cachedClient.db(MONGODB_URI);
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
