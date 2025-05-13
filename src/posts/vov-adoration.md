@@ -91,7 +91,7 @@ In its prayers, the Valley of Vision acknowledges God in profound and heartfelt 
 
 The Valley of Vision doesn’t merely present adoration as abstract reverence—it renders it doxological. Adoration in these prayers naturally moves toward the glorification of God, revealing a rhythm of praise that delights in who God is more than what He gives. The soul, enraptured by the beauty and majesty of God, is drawn upward to give Him glory. The language of the prayers consistently directs attention not inward toward the supplicant’s needs, but upward toward the splendor and sufficiency of God Himself.
 
-This God-centered orientation is especially evident in prayers that begin with humble awe and end in jubilant praise. Consider this line from The Infinite and the Eternal:
+This God-centered orientation is especially evident in prayers that begin with humble awe and end in jubilant praise. Consider this line from *Things Needful*:
 
 > “Fill the garden of my soul with the wind of love,
 > that the scents of the Christian life may be wafted to others;
@@ -103,11 +103,11 @@ This God-centered orientation is especially evident in prayers that begin with h
 
 Here, glory is not only God’s due—it is the believer’s desire. The prayer does not approach God with transaction in mind, but with transformation as its goal: that the heart would be reshaped to delight in God's beauty and magnify His name. Adoration, then, is not merely the first step in prayer; it is the foundation upon which all other expressions—confession, thanksgiving, petition, and intercession—are built.
 
-In The Valley of Vision, adoration is never detached from theology. Each prayer is theologically rich, shaped by a deep understanding of God’s attributes, His redemptive work, and His covenantal faithfulness. This theological weight gives adoration its substance—it is not emotion divorced from truth, but feeling rightly aligned with divine reality.
-
 ## Conclusion
 
 In The Valley of Vision, adoration sets the tone for communion with God. Drawing from Matthew Henry’s framework, we see that this adoration is deeply rooted in the character of God—His sovereignty, holiness, mercy, and grace. The prayers lead the soul to see God as He truly is, and in seeing Him, to worship Him rightly.
+
+Adoration is never detached from theology. Each prayer is theologically rich, shaped by a deep understanding of God’s attributes, His redemptive work, and His covenantal faithfulness. This theological weight gives adoration its substance—it is not emotion divorced from truth, but feeling rightly aligned with divine reality.
 
 These prayers teach us that adoration is more than a component of prayer—it is the heart of it. It reminds us that prayer begins not with ourselves, but with God. It forms the soul in humility, lifts the eyes to heaven, and prepares the heart for repentance, gratitude, and dependence.
 
