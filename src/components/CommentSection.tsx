@@ -1,3 +1,4 @@
+import { supabase } from '@/utils/supabase';
 import React, { useState, useEffect } from 'react';
 
 interface CommentFormProps {
@@ -5,9 +6,10 @@ interface CommentFormProps {
 }
 
 interface Comment {
+  id: number; // Supabase tables typically have an ID
   name: string;
   comment: string;
-  createdAt: string;
+  created_at: string; // Use the Supabase column name
 }
 
 const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
@@ -18,24 +20,48 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoadingComments, setIsLoadingComments] = useState(true); // Add loading state
 
+  // Fetch comments when the component mounts or postId changes
   useEffect(() => {
     const fetchComments = async () => {
-      try {
-        const response = await fetch(`/api/comments?postId=${postId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setComments(data);
-        } else {
-          console.error('Failed to fetch comments');
-        }
-      } catch (err) {
-        console.error('Error fetching comments:', err);
+      setIsLoadingComments(true); // Set loading to true
+      const { data, error } = await supabase
+        .from('comments') // Replace 'comments' with your Supabase table name
+        .select('id, name, comment, created_at') // Select specific columns
+        .eq('post_id', postId) // Filter by post_id
+        .order('created_at', { ascending: false }); // Order by creation date
+
+      if (error) {
+        console.error('Error fetching comments:', error);
+        setError('Failed to load comments.'); // Display error to user
+        setComments([]); // Clear comments on error
+      } else {
+        setComments(data || []); // Set comments (handle case where data is null)
+        setError(null); // Clear any previous errors
       }
+      setIsLoadingComments(false); // Set loading to false
     };
 
     fetchComments();
-  }, [postId]);
+
+    // Optional: Set up real-time subscriptions for new comments
+    // Be mindful of performance and resource usage with real-time subscriptions
+    // This is a basic example; you might need more sophisticated handling
+    const subscription = supabase
+      .channel(`comments:post_id=eq.${postId}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'comments', filter: `post_id=eq.${postId}` }, (payload) => {
+        // Add the new comment to the beginning of the list
+        setComments((currentComments) => [payload.new as Comment, ...currentComments]);
+      })
+      .subscribe();
+
+    // Cleanup the subscription when the component unmounts or postId changes
+    return () => {
+      supabase.removeChannel(subscription);
+    };
+
+  }, [postId]); // Dependency array includes postId
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,33 +75,42 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
     setError(null);
 
     try {
-      const response = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, comment, postId }),
-      });
+      const { data, error } = await supabase
+        .from('comments') // Replace 'comments' with your Supabase table name
+        .insert([
+          {
+            name,
+            email, // Storing email is dependent on your privacy policy and RLS
+            comment,
+            post_id: postId, // Assuming your Supabase column is named 'post_id'
+            // created_at will likely be automatically set by Supabase with a default value
+          },
+        ])
+        .select('id, name, comment, created_at'); // Select the inserted data
 
-      if (response.ok) {
+      if (error) {
+        console.error('Error inserting comment:', error);
+        setError(error.message || 'Something went wrong. Please try again later.');
+      } else {
+        // Assuming real-time subscription is active,
+        // the new comment will be added to the comments state automatically.
+        // If not using real-time, you would manually add the new comment here:
+        // if (data && data.length > 0) {
+        //   setComments((currentComments) => [data[0], ...currentComments]);
+        // }
+
         setName('');
         setEmail('');
         setComment('');
         setIsSubmitted(true);
-        setIsSubmitting(false);
-
-        // Fetch updated comments
-        const updatedComments = await fetch(`/api/comments?postId=${postId}`).then((res) =>
-          res.json()
-        );
-        setComments(updatedComments);
+        // No need to re-fetch all comments if using real-time subscriptions
 
         setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        const data = await response.json();
-        setError(data.message || 'Something went wrong. Please try again later.');
-        setIsSubmitting(false);
       }
     } catch (err) {
+      console.error('Unexpected error during submission:', err);
       setError('Something went wrong. Please try again later.');
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -152,30 +187,31 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
           ></textarea>
         </div>
 
-        {/* <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="save-info"
-            className="h-4 w-4 text-accent border-primary-300 rounded focus:ring-accent"
-            checked={typeof window !== 'undefined' && localStorage.getItem('saveInfo') === 'true'}
-            onChange={(e) => {
-              if (typeof window !== 'undefined') {
-                const saveInfo = e.target.checked;
-                localStorage.setItem('saveInfo', saveInfo.toString());
-                if (saveInfo) {
-                  localStorage.setItem('name', name);
-                  localStorage.setItem('email', email);
-                } else {
-                  localStorage.removeItem('name');
-                  localStorage.removeItem('email');
-                }
-              }
-            }}
-          />
-          <label htmlFor="save-info" className="ml-2 block text-sm text-primary-600">
-            Save my name and email for the next time I comment
-          </label>
-        </div> */}
+        {/* The save info checkbox logic can remain as it interacts with localStorage */}
+         {/* <div className="flex items-center">
+           <input
+             type="checkbox"
+             id="save-info"
+             className="h-4 w-4 text-accent border-primary-300 rounded focus:ring-accent"
+             checked={typeof window !== 'undefined' && localStorage.getItem('saveInfo') === 'true'}
+             onChange={(e) => {
+               if (typeof window !== 'undefined') {
+                 const saveInfo = e.target.checked;
+                 localStorage.setItem('saveInfo', saveInfo.toString());
+                 if (saveInfo) {
+                   localStorage.setItem('name', name);
+                   localStorage.setItem('email', email);
+                 } else {
+                   localStorage.removeItem('name');
+                   localStorage.removeItem('email');
+                 }
+               }
+             }}
+           />
+           <label htmlFor="save-info" className="ml-2 block text-sm text-primary-600">
+             Save my name and email for the next time I comment
+           </label>
+         </div> */}
 
         <button
           type="submit"
@@ -189,24 +225,37 @@ const CommentSection: React.FC<CommentFormProps> = ({ postId }) => {
       <div className="mt-12">
         <h3 className="text-xl font-bold mb-6">Comments ({comments.length})</h3>
 
-        <div className="space-y-6">
-          {comments.map((comment) => (
-            <div
-              key={comment.createdAt}
-              className="bg-white p-6 rounded-md shadow-sm border border-primary-200"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="font-bold">{comment.name}</h4>
-                  <p className="text-sm text-primary-500">
-                    {new Date(comment.createdAt).toLocaleDateString()}
-                  </p>
+        {isLoadingComments ? (
+          <p>Loading comments...</p>
+        ) : comments.length === 0 ? (
+          <p>No comments yet. Be the first to leave one!</p>
+        ) : (
+          <div className="space-y-6">
+            {comments.map((comment) => (
+              <div
+                // Use a more stable key than createdAt if possible, like comment.id from Supabase
+                key={comment.id || comment.created_at}
+                className="bg-white p-6 rounded-md shadow-sm border border-primary-200"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="font-bold">{comment.name}</h4>
+                    <p className="text-sm text-primary-500">
+                      {new Date(comment.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </p>
+                  </div>
                 </div>
+                <p className="text-primary-700">{comment.comment}</p>
               </div>
-              <p className="text-primary-700">{comment.comment}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
