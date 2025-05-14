@@ -1,55 +1,68 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { MongoClient } from 'mongodb';
+import { supabase } from '@/utils/supabase';
+import { NextRequest, NextResponse } from 'next/server'; // Use next/server for Edge runtime
 
 export const runtime = 'edge';
-const uri = process.env.MONGODB_URI || 'your-mongodb-uri';
-const dbName = 'confessions-of-grace';
 
-const client = new MongoClient(uri);
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { name, email, comment, postId } = req.body;
+export default async function POST(req: NextRequest) {
+  try {
+    const { name, email, comment, postId } = await req.json();
 
     if (!name || !email || !comment || !postId) {
-      return res.status(400).json({ message: 'All fields are required' });
+      return NextResponse.json({ message: 'All fields are required' }, { status: 400 });
     }
 
-    try {
-      if (!client.db(dbName)) await client.connect();
-      const db = client.db(dbName);
-      const collection = db.collection('comments');
+    // Insert data into the 'comments' table
+    const { data, error } = await supabase
+      .from('comments') // Replace 'comments' with your Supabase table name
+      .insert([
+        {
+          name,
+          email,
+          comment,
+          post_id: postId,
+          created_at: new Date().toISOString(), // Supabase often uses ISO strings for timestamps
+        },
+      ]);
 
-      await collection.insertOne({ name, email, comment, postId, createdAt: new Date() });
-
-      res.status(201).json({ message: 'Comment submitted successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+    if (error) {
+      console.error('Error inserting comment:', error);
+      return NextResponse.json({ message: 'Error submitting comment', error }, { status: 500 });
     }
-  } else if (req.method === 'GET') {
-    const { postId } = req.query;
+
+    return NextResponse.json({ message: 'Comment submitted successfully', data }, { status: 201 });
+  } catch (error) {
+    console.error('Internal server error during POST:', error);
+    // Catching and returning a 500 for unexpected errors
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    // Get query parameters from the URL
+    const { searchParams } = new URL(req.url);
+    const postId = searchParams.get('postId');
 
     if (!postId) {
-      return res.status(400).json({ message: 'Post ID is required' });
+      return NextResponse.json({ message: 'Post ID is required' }, { status: 400 });
     }
 
-    try {
-      if (!client.db(dbName)) await client.connect();
-      const db = client.db(dbName);
-      const collection = db.collection('comments');
+    // Fetch comments for a specific postId, ordered by creation date descending
+    const { data: comments, error } = await supabase
+      .from('comments') // Replace 'comments' with your Supabase table name
+      .select('*')
+      .eq('post_id', postId) // Assuming your Supabase column for post ID is 'post_id'
+      .order('created_at', { ascending: false }); // Assuming your timestamp column is 'created_at'
 
-      const comments = await collection
-        .find({ postId })
-        .sort({ createdAt: -1 })
-        .toArray();
-
-      res.status(200).json(comments);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+    if (error) {
+      console.error('Error fetching comments:', error);
+      return NextResponse.json({ message: 'Error fetching comments', error }, { status: 500 });
     }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
+
+    return NextResponse.json(comments, { status: 200 });
+  } catch (error) {
+    console.error('Internal server error during GET:', error);
+    // Catching and returning a 500 for unexpected errors
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
