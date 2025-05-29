@@ -53,7 +53,7 @@ const About: React.FC = () => {
           <h3 className="text-xl font-bold mb-3">Our Associations</h3>
           <p className="text-primary-700 mb-6">
             We are associated with the <a href="https://reformedwitness.net" className="text-accent hover:text-accent-dark">
-            Reformed Witness Network (RWN)</a>, a group of Reformed Baptist churches committed to the proclamation of the gospel and the advancement of Christ's kingdom.
+            Reformed Witness Network (RWN)</a>, a group committed to the proclamation of the gospel and the advancement of Christ's kingdom.
             Through RWN, we aim to foster fellowship among like-minded believers and support the spread of Reformed theology globally.
           </p>
           
