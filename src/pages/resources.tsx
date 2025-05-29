@@ -56,6 +56,13 @@ const Resources: React.FC = () => {
       description: "A comprehensive resource for Reformed theology, including articles, books, and audio resources.",
       link: "https://www.monergism.com/",
       category: "Websites"
+    },
+    {
+      title: "Church Finder",
+      author: "",
+      description: "Find a Reformed Baptist church near you using our interactive map.",
+      link: "/church-finder",
+      category: "Websites"
     }
   ];
 
