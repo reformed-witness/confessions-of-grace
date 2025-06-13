@@ -1,7 +1,7 @@
 ---
 title: "Frank Turek & The Fourfold State of Man"
 date: "2025-03-18"
-author: "@Auggie2LBCF"
+author: "Auggie2LBCF"
 excerpt: "The 'contradiction' that Geisler suggests, is not a contradiction but an incomplete understanding of the abilities of Adam, the abilities of Adam's offspring, and the abilities of those who receive God's abundant provision of grace, who are given the responsibility to freely offer that abundant provision of grace to all those who are Adam's offspring."
 tags: ["sin", "calvinism", "creation", "fourfold"]
 coverImage: "/images/thomas-boston.jpg"

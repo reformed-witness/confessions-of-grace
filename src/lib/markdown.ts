@@ -112,3 +112,8 @@ export function getPostsByTag(tag: string): PostMetadata[] {
   const allPosts = getSortedPostsData();
   return allPosts.filter(post => post.tags.includes(tag));
 }
+
+export function getPostsByAuthor(author: string): PostMetadata[] {
+  const allPosts = getSortedPostsData();
+  return allPosts.filter(post => post.author.includes(author));
+}

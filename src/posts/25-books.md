@@ -1,7 +1,7 @@
 ---
 title: "My Top 25 Books (Outside the Bible) in No Particular Order"
 date: "2025-04-22"
-author: "@Auggie2LBCF"
+author: "Auggie2LBCF"
 excerpt: "A curated list of my top 25 books (outside the Bible), spanning theology, Christian living, and even some fiction. These works have deeply shaped my faith, ministry, and personal growth."
 tags: ["books", "fiction", "theology", "personal life"]
 coverImage: "/images/25-books.png"

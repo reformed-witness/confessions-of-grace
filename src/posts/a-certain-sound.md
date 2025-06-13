@@ -1,7 +1,7 @@
 ---
 title: "Review - A Certain Sound by Ryan Denton"
 date: "2025-05-09"
-author: "@Auggie2LBCF"
+author: "Auggie2LBCF"
 excerpt: "The title itself, A Certain Sound, draws from 1 Corinthians 14:8, which states, \"For if the trumpet give an uncertain sound, who shall prepare himself to the battle?\""
 tags: ["books", "review", "evangelism", "preaching"]
 coverImage: "/images/a-certain-sound.jpg"
