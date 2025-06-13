@@ -1,7 +1,7 @@
 ---
 title: "Valley of Vision - Part 1: Adoration"
 date: "2025-05-13"
-author: "@Auggie2LBCF"
+author: "Auggie2LBCF"
 excerpt: "I must reverently adore God, as a Being transcendently bright and blessed, self-existent and self-sufficient, an infinite and eternal Spirit who has all perfections in himself, and give him the glory of his titles and attributes."
 tags: ["the valley of vision", "prayer", "puritans", "adoration"]
 coverImage: "/images/valley-of-vision.png"
