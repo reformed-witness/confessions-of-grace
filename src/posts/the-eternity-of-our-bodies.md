@@ -4,7 +4,7 @@ date: "2025-08-15"
 author: "Auggie2LBCF"
 excerpt: "A curated list of my top 25 books (outside the Bible), spanning theology, Christian living, and even some fiction. These works have deeply shaped my faith, ministry, and personal growth."
 tags: ["2lbcf", "anthropoloy", "theology", "personal life"]
-coverImage: "/images/the-eternity-of-our-bodies.png"
+coverImage: "/images/the-eternity-of-our-bodies.jpg"
 ---
 # Introduction
 
