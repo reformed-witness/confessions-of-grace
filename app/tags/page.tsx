@@ -1,148 +1,79 @@
 
-import ShareButtons from '@/components/ShareButtons';
-import { getPostData, getSortedPostsData, getAllPostIds } from '@/lib/markdown';
-import { PostData, PostMetadata } from '@/types';
-import { format } from 'date-fns';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
-import CommentSection from "@/components/CommentSection";
+import Link from 'next/link';
+import { getSortedPostsData } from '@/lib/markdown';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
 
-interface PageProps {
-    params: Promise<{ id: string }>;
+export async function generateMetadata(): Promise<Metadata> {
+    return createMetadata({
+        title: 'Tags',
+        description: 'Browse all tags used on Confessions of Grace to find posts by topic.',
+        url: 'https://confessionsofgrace.com/tags',
+        type: 'website'
+    });
 }
 
-export async function generateStaticParams() {
+async function getAllTags(): Promise<{ tag: string; count: number }[]> {
     try {
         const posts = getSortedPostsData();
-        return posts.map((post) => ({
-            id: post.id,
-        }));
+        const tagCount: { [key: string]: number } = {};
+
+        // Count occurrences of each tag
+        posts.forEach(post => {
+            post.tags.forEach(tag => {
+                if (tag && tag.trim() !== '') {
+                    tagCount[tag] = (tagCount[tag] || 0) + 1;
+                }
+            });
+        });
+
+        // Convert to array and sort by count (descending) then by name
+        return Object.entries(tagCount)
+            .map(([tag, count]) => ({ tag, count }))
+            .sort((a, b) => {
+                if (b.count !== a.count) return b.count - a.count;
+                return a.tag.localeCompare(b.tag);
+            });
     } catch (error) {
-        console.error('Failed to generate post paths during build:', error);
+        console.error('Error getting tags:', error);
         return [];
     }
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { id } = await params;
-    const post = await getPostData(id);
-    const postUrl = `https://confessionsofgrace.com/posts/${post.id}`;
-
-    return createMetadata({
-        title: post.title,
-        description: post.excerpt,
-        keywords: post.tags.join(', '),
-        image: post.coverImage,
-        url: postUrl,
-        type: 'article'
-    });
-}
-
-async function getPostAndMorePosts(id: string): Promise<{ post: PostData; morePosts: PostMetadata[] }> {
-    const post = await getPostData(id);
-    const allPosts = getSortedPostsData();
-
-    // Filter out the current post and get a few related posts (by tags)
-    const otherPosts = allPosts.filter(p => p.id !== post.id);
-
-    // Find posts with matching tags
-    const relatedPosts = otherPosts
-        .filter(p => p.tags.some(tag => post.tags.includes(tag)))
-        .slice(0, 2);
-
-    // If we don't have enough related posts, add recent posts
-    const morePosts = relatedPosts.length < 2
-        ? [...relatedPosts, ...otherPosts.filter(p => !relatedPosts.includes(p))].slice(0, 2)
-        : relatedPosts;
-
-    return { post, morePosts };
-}
-
-export default async function PostPage({ params }: PageProps) {
-    const { id } = await params;
-    const { post, morePosts } = await getPostAndMorePosts(id);
-    const postUrl = `https://confessionsofgrace.com/posts/${post.id}`;
+export default async function TagsPage() {
+    const tags = await getAllTags();
 
     return (
-        <article className="max-w-3xl mx-auto">
-            <header className="mb-8">
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{post.title}</h1>
-                <div className="flex items-center text-primary-500 mb-6">
-                    <span>{post.author}</span>
-                    <span className="mx-2">•</span>
-                    <time dateTime={post.date}>
-                        {format(new Date(post.date), 'MMMM d, yyyy')}
-                    </time>
-                </div>
-                {post.coverImage && (
-                    <div className="relative h-64 md:h-96 w-full mb-8 rounded-lg overflow-hidden">
-                        <Image
-                            src={post.coverImage}
-                            alt={post.title}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
-                    </div>
-                )}
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {post.tags.map(tag => (
+        <div className="max-w-4xl mx-auto">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6">Browse by Tag</h1>
+
+            <p className="text-lg text-primary-700 mb-8">
+                Explore posts organized by topic. Click on any tag to see all posts with that tag.
+            </p>
+
+            {tags.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {tags.map(({ tag, count }) => (
                         <Link
                             key={tag}
-                            href={`/tags/${tag}`}
-                            className="text-sm bg-primary-100 text-primary-600 px-3 py-1 rounded-md hover:bg-primary-200"
+                            href={`/tags/${encodeURIComponent(tag)}`}
+                            className="bg-white border border-primary-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                         >
-                            {tag}
+                            <div className="flex justify-between items-center">
+                                <span className="font-medium text-primary-700">{tag}</span>
+                                <span className="bg-primary-100 text-primary-600 px-2 py-1 rounded-full text-sm">
+                                    {count} {count === 1 ? 'post' : 'posts'}
+                                </span>
+                            </div>
                         </Link>
                     ))}
                 </div>
-            </header>
-
-            <div
-                className="blog-post prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-
-            <div className="mt-8 pt-6 border-t border-primary-200">
-                <ShareButtons
-                    url={postUrl}
-                    title={post.title}
-                    description={post.excerpt}
-                />
-            </div>
-
-            <div className="mt-12 pt-6 border-t border-primary-200">
-                <h2 className="text-2xl font-bold mb-6">More Posts</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {morePosts.slice(0, 2).map(post => (
-                        <div key={post.id} className="bg-white p-6 rounded-md border border-primary-200 shadow-sm">
-                            <h3 className="font-bold mb-2">
-                                <Link href={`/posts/${post.id}`} className="hover:text-accent-dark">
-                                    {post.title}
-                                </Link>
-                            </h3>
-                            <p className="text-primary-600 text-sm mb-2">
-                                {format(new Date(post.date), 'MMMM d, yyyy')}
-                            </p>
-                            <p className="text-primary-700">{post.excerpt}</p>
-                        </div>
-                    ))}
+            ) : (
+                <div className="text-center py-12">
+                    <p className="text-xl text-primary-500">No tags found.</p>
                 </div>
-            </div>
-
-            <CommentSection postId={post.id} />
-
-            <div className="mt-12 pt-6 border-t border-primary-200">
-                <Link href="/posts" className="text-accent-dark hover:text-accent inline-flex items-center">
-                    <svg className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Back to all posts
-                </Link>
-            </div>
-        </article>
+            )}
+        </div>
     );
 }

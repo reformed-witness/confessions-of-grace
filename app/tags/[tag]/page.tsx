@@ -10,38 +10,48 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-    const posts = getSortedPostsData();
-    const tags = Array.from(new Set(posts.flatMap(post => post.tags)));
+    try {
+        const posts = getSortedPostsData();
+        const tags = Array.from(new Set(posts.flatMap(post => post.tags)));
 
-    return tags.map((tag) => ({
-        tag: tag,
-    }));
+        return tags
+            .filter(tag => tag && tag.trim() !== '') // Filter out empty or undefined tags
+            .map((tag) => ({
+                tag: encodeURIComponent(tag),
+            }));
+    } catch (error) {
+        console.error('Error generating static params for tags:', error);
+        return [];
+    }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { tag } = await params;
+    const decodedTag = decodeURIComponent(tag);
     return createMetadata({
-        title: `Posts tagged "${tag}"`,
-        description: `Browse all posts tagged with "${tag}" on Confessions of Grace.`,
+        title: `Posts tagged "${decodedTag}"`,
+        description: `Browse all posts tagged with "${decodedTag}" on Confessions of Grace.`,
         url: `https://confessionsofgrace.com/tags/${tag}`,
         type: 'website'
     });
 }
 
 async function getPostsByTagData(tag: string): Promise<PostMetadata[]> {
-    return getPostsByTag(tag);
+    const decodedTag = decodeURIComponent(tag);
+    return getPostsByTag(decodedTag);
 }
 
 export default async function TagPage({ params }: PageProps) {
     const { tag } = await params;
+    const decodedTag = decodeURIComponent(tag);
     const posts = await getPostsByTagData(tag);
 
     return (
         <div className="max-w-4xl mx-auto">
             <div className="mb-10">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">Tag: {tag}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">Tag: {decodedTag}</h1>
                 <p className="text-lg text-primary-600">
-                    {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged with "{tag}"
+                    {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged with "{decodedTag}"
                 </p>
             </div>
 

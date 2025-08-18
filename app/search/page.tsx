@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { getSortedPostsData } from '@/lib/markdown';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
@@ -24,7 +24,9 @@ export default async function SearchPage() {
     return (
         <div className="max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-6">Search Results</h1>
-            <SearchClient allPosts={allPosts} />
+            <Suspense fallback={<div>Loading search...</div>}>
+                <SearchClient allPosts={allPosts} />
+            </Suspense>
         </div>
     );
 }
