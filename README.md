@@ -1,113 +1,36 @@
-# Confessions of Grace
-
-A blog about Reformed theology built with Next.js and TypeScript, featuring Markdown-based content management.
-
-## Features
-
-- Modern static site built with Next.js
-- TypeScript for type safety
-- Content management using Markdown files
-- Responsive design with Tailwind CSS
-- Flat design style with Reformed theology aesthetics
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js (>= 16.x)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/confessions-of-grace.git
-cd confessions-of-grace
-```
-
-2. Install dependencies
-
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Run the development server
+First, run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Project Structure
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-├── public/               # Static assets
-│   └── images/           # Images for blog posts
-├── src/                  # Source code
-│   ├── components/       # React components
-│   ├── lib/              # Utility functions
-│   ├── pages/            # Next.js pages
-│   ├── posts/            # Markdown blog posts
-│   ├── styles/           # CSS styles
-│   └── types/            # TypeScript type definitions
-├── .gitignore
-├── next.config.js
-├── package.json
-├── postcss.config.js
-├── README.md
-├── tailwind.config.js
-└── tsconfig.json
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Writing Blog Posts
+## Learn More
 
-To add a new blog post, create a new Markdown file in the `src/posts` directory with the following format:
+To learn more about Next.js, take a look at the following resources:
 
-```markdown
----
-title: "Your Post Title"
-date: "YYYY-MM-DD"
-author: "Your Name"
-excerpt: "A brief excerpt of your post"
-tags: ["Tag1", "Tag2"]
-coverImage: "/images/your-image.jpg"
----
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-# Your Post Title
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Your content goes here...
-```
+## Deploy on Vercel
 
-## Deployment
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-The site can be deployed to various platforms:
-
-### Vercel (Recommended)
-
-```bash
-npm install -g vercel
-vercel
-```
-
-### Standard Build
-
-```bash
-npm run build
-npm start
-```
-
-## Customization
-
-- Modify the design in `tailwind.config.js` and `src/styles/globals.css`
-- Update site content in component files
-- Add or modify pages in the `src/pages` directory
-
-## License
-
-This project is licensed under the MIT License.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
