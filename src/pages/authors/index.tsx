@@ -57,21 +57,27 @@ const AuthorsPage: React.FC<AuthorsPageProps> = ({ authors }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: authorsData, error } = await supabase
-    .from('authors')
-    .select('name, bio, x_link, fb_link, insta_link, pfp_link');
+  try {
+    const { data: authorsData, error } = await supabase
+      .from('authors')
+      .select('name, bio, x_link, fb_link, insta_link, pfp_link');
 
-  if (error || !authorsData) {
-    console.error('Error fetching authors:', error);
+    if (error || !authorsData) {
+      console.error('Error fetching authors:', error);
+      // Return empty array for static export fallback
+      return { props: { authors: [] } };
+    }
+
+    return {
+      props: {
+        authors: authorsData,
+      },
+    };
+  } catch (error) {
+    console.error('Failed to fetch authors during build:', error);
+    // Fallback for static export when Supabase is not available during build
     return { props: { authors: [] } };
   }
-
-  return {
-    props: {
-      authors: authorsData,
-    },
-    revalidate: 60,
-  };
 };
 
 export default AuthorsPage;

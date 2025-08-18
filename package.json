@@ -6,9 +6,12 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
+        "build:static": "next build",
         "start": "next start",
         "lint": "next lint",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "deploy:cf": "npm run build:static && npx wrangler deploy",
+        "preview:cf": "npm run build:static && npx wrangler dev"
     },
     "keywords": [
         "blog",

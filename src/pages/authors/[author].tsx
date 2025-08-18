@@ -127,17 +127,25 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ posts, author }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getSortedPostsData();
-  const authors = Array.from(new Set(posts.flatMap(post => post.author)));
+  try {
+    const posts = getSortedPostsData();
+    const authors = Array.from(new Set(posts.flatMap(post => post.author)));
 
-  const paths = authors.map((author) => ({
-    params: { author },
-  }));
+    const paths = authors.map((author) => ({
+      params: { author },
+    }));
 
-  return {
-    paths,
-    fallback: false,
-  };
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    console.error('Failed to generate author paths during build:', error);
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
