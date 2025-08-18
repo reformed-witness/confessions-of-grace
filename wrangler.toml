@@ -1,3 +1,6 @@
 name = "confessions-of-grace"
 compatibility_date = "2025-03-25"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "out"
