@@ -4,8 +4,8 @@ import "./globals.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {defaultMetadata} from '@/components/Metadata';
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import {Analytics} from "@vercel/analytics/next"
+import {SpeedInsights} from "@vercel/speed-insights/next"
 
 export const metadata = defaultMetadata;
 
@@ -36,9 +36,9 @@ export default function RootLayout({
             </main>
             <Footer/>
         </div>
-        </body>
         <Analytics/>
         <SpeedInsights/>
+        </body>
         </html>
     );
 }
