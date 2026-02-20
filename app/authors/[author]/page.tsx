@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from '@/components/PostCard';
-import { getSortedPostsData, getPostsByAuthor } from '@/lib/markdown';
+import { getPostsByAuthor } from '@/lib/posts';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
@@ -10,19 +10,7 @@ interface PageProps {
     params: Promise<{ author: string }>;
 }
 
-export async function generateStaticParams() {
-    try {
-        const posts = getSortedPostsData();
-        const authors = Array.from(new Set(posts.flatMap(post => post.author)));
-
-        return authors.map((author) => ({
-            author: author,
-        }));
-    } catch (error) {
-        console.error('Failed to generate author paths during build:', error);
-        return [];
-    }
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { author } = await params;
@@ -35,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 async function getPostsByAuthorData(author: string): Promise<PostMetadata[]> {
-    return getPostsByAuthor(author);
+    return await getPostsByAuthor(author);
 }
 
 export default async function AuthorPage({ params }: PageProps) {

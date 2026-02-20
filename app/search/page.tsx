@@ -1,5 +1,7 @@
+export const dynamic = 'force-dynamic';
+
 import React, {Suspense} from 'react';
-import { getSortedPostsData } from '@/lib/markdown';
+import { getSortedPostsData } from '@/lib/posts';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
