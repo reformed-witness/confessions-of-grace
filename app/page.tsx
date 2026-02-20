@@ -1,13 +1,15 @@
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import PostCard from '@/components/PostCard';
 import Sidebar from '@/components/Sidebar';
-import { getSortedPostsData } from '@/lib/markdown';
+import { getSortedPostsData } from '@/lib/posts';
 import { PostMetadata } from '@/types';
 import Image from 'next/image';
 
 // This function runs on the server during build time
 async function getHomeData() {
-  const posts = getSortedPostsData();
+  const posts = await getSortedPostsData();
 
   // Create tag data
   const allTags = posts.flatMap(post => post.tags);

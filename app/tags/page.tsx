@@ -1,7 +1,8 @@
+export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import Link from 'next/link';
-import { getSortedPostsData } from '@/lib/markdown';
+import { getSortedPostsData } from '@/lib/posts';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
 
@@ -16,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getAllTags(): Promise<{ tag: string; count: number }[]> {
     try {
-        const posts = getSortedPostsData();
+        const posts = await getSortedPostsData();
         const tagCount: { [key: string]: number } = {};
 
         // Count occurrences of each tag

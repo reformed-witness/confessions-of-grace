@@ -1,5 +1,7 @@
+export const dynamic = "force-dynamic";
+
 import ShareButtons from "@/components/ShareButtons";
-import { getPostData, getSortedPostsData } from "@/lib/markdown";
+import { getPostData, getSortedPostsData } from "@/lib/posts";
 import { PostData, PostMetadata } from "@/types";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -34,7 +36,7 @@ async function getPostAndMorePosts(
   id: string,
 ): Promise<{ post: PostData; morePosts: PostMetadata[] }> {
   const post = await getPostData(id);
-  const allPosts = getSortedPostsData();
+  const allPosts = await getSortedPostsData();
 
   // Filter out the current post and get a few related posts (by tags)
   const otherPosts = allPosts.filter((p) => p.id !== post.id);

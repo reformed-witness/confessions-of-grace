@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { getSortedPostsData } from '@/lib/markdown';
+import { getSortedPostsData } from '@/lib/posts';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
@@ -16,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getPostsAndYears(): Promise<{ posts: PostMetadata[]; years: number[] }> {
-    const posts = getSortedPostsData();
+    const posts = await getSortedPostsData();
 
     // Extract unique years from post dates
     const years = Array.from(new Set(

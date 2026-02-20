@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { supabase } from '@/utils/supabase';
+import { createClient } from '@/utils/supabase/server';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
 
@@ -25,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getAuthors(): Promise<AuthorProfile[]> {
     try {
+        const supabase = await createClient();
         const { data: authorsData, error } = await supabase
             .from('authors')
             .select('name, bio, x_link, fb_link, insta_link, pfp_link');

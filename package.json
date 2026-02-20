@@ -6,9 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate-posts": "npx tsx scripts/migrate-posts.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.55.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
@@ -20,8 +22,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
-    "supabase": "^2.34.3"
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -29,6 +30,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.3.1",
+    "supabase": "^2.76.11",
     "tailwindcss": "^4.1.12",
     "typescript": "^5",
     "wrangler": "^4.31.0"
