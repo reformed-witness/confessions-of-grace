@@ -1,6 +1,8 @@
 "use client"
 
-import { supabase } from '@/utils/supabase';
+import { createClient } from '@/utils/supabase/client';
+
+const supabase = createClient();
 import React, { useState, useEffect } from 'react';
 
 interface CommentFormProps {

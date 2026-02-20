@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from '@/components/PostCard';
-import { getSortedPostsData, getPostsByTag } from '@/lib/markdown';
+import { getPostsByTag } from '@/lib/posts';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
@@ -9,21 +9,7 @@ interface PageProps {
     params: Promise<{ tag: string }>;
 }
 
-export async function generateStaticParams() {
-    try {
-        const posts = getSortedPostsData();
-        const tags = Array.from(new Set(posts.flatMap(post => post.tags)));
-
-        return tags
-            .filter(tag => tag && tag.trim() !== '') // Filter out empty or undefined tags
-            .map((tag) => ({
-                tag: encodeURIComponent(tag),
-            }));
-    } catch (error) {
-        console.error('Error generating static params for tags:', error);
-        return [];
-    }
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { tag } = await params;
@@ -38,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 async function getPostsByTagData(tag: string): Promise<PostMetadata[]> {
     const decodedTag = decodeURIComponent(tag);
-    return getPostsByTag(decodedTag);
+    return await getPostsByTag(decodedTag);
 }
 
 export default async function TagPage({ params }: PageProps) {

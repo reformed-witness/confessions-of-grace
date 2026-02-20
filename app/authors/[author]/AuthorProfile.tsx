@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '@/utils/supabase';
+import { createClient } from '@/utils/supabase/client';
+
+const supabase = createClient();
 import { PostMetadata } from '@/types';
 
 interface AuthorProfile {
