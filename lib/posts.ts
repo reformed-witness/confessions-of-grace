@@ -1,125 +1,94 @@
-import { createClient } from "@/utils/supabase/server";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { remark } from "remark";
+import html from "remark-html";
 import { PostData, PostMetadata } from "@/types";
 
-export async function getSortedPostsData(): Promise<PostMetadata[]> {
-  const supabase = await createClient();
+const postsDirectory = path.join(process.cwd(), "data/posts");
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, title, date, excerpt, author, tags, cover_image")
-    .eq("published", true)
-    .order("date", { ascending: false });
+interface PostFrontmatter {
+  title: string;
+  date: string;
+  author: string;
+  excerpt: string;
+  tags?: string[];
+  coverImage?: string;
+}
 
-  if (error) {
-    console.error("Error fetching posts:", error);
+function getPostIds(): string[] {
+  if (!fs.existsSync(postsDirectory)) {
     return [];
   }
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((fileName) => fileName.endsWith(".md"))
+    .map((fileName) => fileName.replace(/\.md$/, ""));
+}
 
-  return (data || []).map((post) => ({
-    id: post.id,
-    title: post.title,
-    date: post.date,
-    excerpt: post.excerpt,
-    author: post.author,
-    tags: post.tags || [],
-    coverImage: post.cover_image || undefined,
-  }));
+function readPostMetadata(id: string): PostMetadata {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data } = matter(fileContents);
+  const frontmatter = data as PostFrontmatter;
+
+  return {
+    id,
+    title: frontmatter.title,
+    date: frontmatter.date,
+    excerpt: frontmatter.excerpt,
+    author: frontmatter.author,
+    tags: frontmatter.tags || [],
+    coverImage: frontmatter.coverImage || undefined,
+  };
+}
+
+export async function getSortedPostsData(): Promise<PostMetadata[]> {
+  const posts = getPostIds().map((id) => readPostMetadata(id));
+
+  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export async function getAllPostIds(): Promise<{ params: { id: string } }[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id")
-    .eq("published", true);
-
-  if (error) {
-    console.error("Error fetching post IDs:", error);
-    return [];
-  }
-
-  return (data || []).map((post) => ({
-    params: { id: post.id },
+  return getPostIds().map((id) => ({
+    params: { id },
   }));
 }
 
 export async function getPostData(id: string): Promise<PostData> {
-  const supabase = await createClient();
+  const fullPath = path.join(postsDirectory, `${id}.md`);
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, title, date, excerpt, content_html, author, tags, cover_image")
-    .eq("id", id)
-    .single();
-
-  if (error || !data) {
-    console.error(`Error fetching post ${id}:`, error);
+  if (!fs.existsSync(fullPath)) {
     throw new Error(`Post not found: ${id}`);
   }
 
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+  const frontmatter = data as PostFrontmatter;
+
+  const processedContent = await remark().use(html).process(content);
+  const contentHtml = processedContent.toString();
+
   return {
-    id: data.id,
-    title: data.title,
-    date: data.date,
-    excerpt: data.excerpt,
-    content: data.content_html,
-    author: data.author,
-    tags: data.tags || [],
-    coverImage: data.cover_image || undefined,
+    id,
+    title: frontmatter.title,
+    date: frontmatter.date,
+    excerpt: frontmatter.excerpt,
+    content: contentHtml,
+    author: frontmatter.author,
+    tags: frontmatter.tags || [],
+    coverImage: frontmatter.coverImage || undefined,
   };
 }
 
 export async function getPostsByTag(tag: string): Promise<PostMetadata[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, title, date, excerpt, author, tags, cover_image")
-    .eq("published", true)
-    .contains("tags", [tag])
-    .order("date", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching posts by tag:", error);
-    return [];
-  }
-
-  return (data || []).map((post) => ({
-    id: post.id,
-    title: post.title,
-    date: post.date,
-    excerpt: post.excerpt,
-    author: post.author,
-    tags: post.tags || [],
-    coverImage: post.cover_image || undefined,
-  }));
+  const posts = await getSortedPostsData();
+  return posts.filter((post) => post.tags.includes(tag));
 }
 
 export async function getPostsByAuthor(
-  author: string
+  author: string,
 ): Promise<PostMetadata[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, title, date, excerpt, author, tags, cover_image")
-    .eq("published", true)
-    .eq("author", author)
-    .order("date", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching posts by author:", error);
-    return [];
-  }
-
-  return (data || []).map((post) => ({
-    id: post.id,
-    title: post.title,
-    date: post.date,
-    excerpt: post.excerpt,
-    author: post.author,
-    tags: post.tags || [],
-    coverImage: post.cover_image || undefined,
-  }));
+  const posts = await getSortedPostsData();
+  return posts.filter((post) => post.author === author);
 }

@@ -1,20 +1,8 @@
-export const dynamic = 'force-dynamic';
-
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { createClient } from '@/utils/supabase/server';
+import { getAllAuthors } from '@/lib/authors';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
-
-interface AuthorProfile {
-    name: string;
-    bio: string;
-    x_link?: string;
-    fb_link?: string;
-    insta_link?: string;
-    pfp_link?: string;
-}
 
 export async function generateMetadata(): Promise<Metadata> {
     return createMetadata({
@@ -25,27 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
     });
 }
 
-async function getAuthors(): Promise<AuthorProfile[]> {
-    try {
-        const supabase = await createClient();
-        const { data: authorsData, error } = await supabase
-            .from('authors')
-            .select('name, bio, x_link, fb_link, insta_link, pfp_link');
-
-        if (error || !authorsData) {
-            console.error('Error fetching authors:', error);
-            return [];
-        }
-
-        return authorsData;
-    } catch (error) {
-        console.error('Failed to fetch authors during build:', error);
-        return [];
-    }
-}
-
 export default async function AuthorsPage() {
-    const authors = await getAuthors();
+    const authors = await getAllAuthors();
 
     return (
         <div className="max-w-5xl mx-auto px-4">
@@ -55,20 +24,16 @@ export default async function AuthorsPage() {
                 {authors.map((author) => (
                     <Link
                         key={author.name}
-                        href={`/authors/${author.name}`}
+                        href={`/authors/${encodeURIComponent(author.slug)}`}
                         className="bg-white rounded-lg shadow-md p-5 flex flex-col items-center hover:shadow-lg transition-shadow"
                     >
-                        <div className="w-24 h-24 mb-4 relative">
-                            <Image
-                                src={author.pfp_link || '/images/authors/default.jpg'}
-                                alt={`${author.name}'s profile`}
-                                fill
-                                className="rounded-full object-cover"
-                                sizes="96px"
-                            />
+                        <div className="w-24 h-24 mb-4 rounded-full bg-gray-200 flex items-center justify-center text-2xl font-bold text-gray-500">
+                            {author.name.charAt(0).toUpperCase()}
                         </div>
                         <h2 className="text-lg font-semibold">{author.name}</h2>
-                        {/* You can include bio or social icons here */}
+                        <p className="text-sm text-primary-500 mt-1">
+                            {author.postCount} {author.postCount === 1 ? 'post' : 'posts'}
+                        </p>
                     </Link>
                 ))}
             </div>
