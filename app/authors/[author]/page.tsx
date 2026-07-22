@@ -1,6 +1,7 @@
 import React from 'react';
 import PostCard from '@/components/PostCard';
 import { getPostsByAuthor } from '@/lib/posts';
+import { getAllAuthors } from '@/lib/authors';
 import { PostMetadata } from '@/types';
 import { generateMetadata as createMetadata } from '@/components/Metadata';
 import type { Metadata } from 'next';
@@ -10,13 +11,19 @@ interface PageProps {
     params: Promise<{ author: string }>;
 }
 
-export const dynamic = 'force-dynamic';
+export async function generateStaticParams() {
+    const authors = await getAllAuthors();
+    return authors.map((author) => ({
+        author: author.slug,
+    }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { author } = await params;
+    const decodedAuthor = decodeURIComponent(author);
     return createMetadata({
-        title: `${author} | Author`,
-        description: `Posts authored by ${author} on Confessions of Grace.`,
+        title: `${decodedAuthor} | Author`,
+        description: `Posts authored by ${decodedAuthor} on Confessions of Grace.`,
         url: `https://confessionsofgrace.com/authors/${author}`,
         type: 'website'
     });
@@ -28,15 +35,16 @@ async function getPostsByAuthorData(author: string): Promise<PostMetadata[]> {
 
 export default async function AuthorPage({ params }: PageProps) {
     const { author } = await params;
-    const posts = await getPostsByAuthorData(author);
+    const decodedAuthor = decodeURIComponent(author);
+    const posts = await getPostsByAuthorData(decodedAuthor);
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AuthorProfile author={author} posts={posts} />
+            <AuthorProfile author={decodedAuthor} posts={posts} />
 
             {/* Posts */}
             <p className="text-lg text-primary-600 mb-6">
-                {posts.length} {posts.length === 1 ? 'post' : 'posts'} authored by "{author}"
+                {posts.length} {posts.length === 1 ? 'post' : 'posts'} authored by &quot;{decodedAuthor}&quot;
             </p>
 
             {posts.length > 0 ? (

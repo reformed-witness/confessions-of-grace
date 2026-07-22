@@ -8,6 +8,9 @@ interface SubscribeFormProps {
   className?: string;
 }
 
+// Email subscriptions require a backend which has been removed for the static
+// build. This form is a no-op: it never calls any API and simply informs the
+// user that subscriptions are unavailable.
 const SubscribeForm: React.FC<SubscribeFormProps> = ({
   placeholder = 'Your email',
   buttonLabel = 'Subscribe',
@@ -15,40 +18,10 @@ const SubscribeForm: React.FC<SubscribeFormProps> = ({
 }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!email) {
-      setMessage('Please enter your email.');
-      return;
-    }
-
-    setLoading(true);
-    setMessage('');
-
-    try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok) {
-        setMessage('You have successfully subscribed!');
-        setEmail('');
-      } else {
-        const errorData = await response.json();
-        setMessage(`Error: ${errorData.message}`);
-      }
-    } catch (error) {
-      setMessage('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    setMessage('Subscriptions are currently unavailable.');
   };
 
   return (
@@ -65,9 +38,8 @@ const SubscribeForm: React.FC<SubscribeFormProps> = ({
       <button
         type="submit"
         className="button w-full"
-        disabled={loading}
       >
-        {loading ? 'Subscribing...' : buttonLabel}
+        {buttonLabel}
       </button>
       {message && <p className="text-sm text-primary-700">{message}</p>}
     </form>

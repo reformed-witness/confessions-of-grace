@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import CommentSection from "@/components/CommentSection";
 import { generateMetadata as createMetadata } from "@/components/Metadata";
 import type { Metadata } from "next";
 
@@ -135,8 +134,6 @@ export default async function PostPage({ params }: PageProps) {
           ))}
         </div>
       </div>
-
-      <CommentSection postId={post.id} />
 
       <div className="mt-12 pt-6 border-t border-primary-200">
         <Link
