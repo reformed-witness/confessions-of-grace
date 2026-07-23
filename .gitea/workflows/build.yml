@@ -1,0 +1,43 @@
+name: build-and-publish
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to the Gitea container registry
+        run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login git.thebennett.net -u "${{ secrets.REGISTRY_USER }}" --password-stdin
+
+      # --no-cache: the platform is a 0.1.0-SNAPSHOT dependency, so a stale cached maven layer could bake
+      # in an old (e.g. unpatched) version. Always resolve fresh for a correct, scanned image.
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: "1"
+          MAVEN_USER: ${{ secrets.REGISTRY_USER }}
+          MAVEN_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          docker build --no-cache \
+            --secret id=maven_user,env=MAVEN_USER \
+            --secret id=maven_token,env=MAVEN_TOKEN \
+            --build-arg GIT_SHA=${{ github.sha }} \
+            -t git.thebennett.net/reformedwitness/confessions-of-grace:latest \
+            -t git.thebennett.net/reformedwitness/confessions-of-grace:${{ github.sha }} .
+
+      - name: Scan image (Trivy)
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --no-progress \
+            git.thebennett.net/reformedwitness/confessions-of-grace:latest || true
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed \
+            --pkg-types library --exit-code 1 --no-progress \
+            git.thebennett.net/reformedwitness/confessions-of-grace:latest
+
+      - name: Push image
+        run: |
+          docker push git.thebennett.net/reformedwitness/confessions-of-grace:latest
+          docker push git.thebennett.net/reformedwitness/confessions-of-grace:${{ github.sha }}
