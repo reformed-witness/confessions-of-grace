@@ -2,6 +2,9 @@ name: build-and-publish
 on:
   push:
     branches: [main]
+    # Files that can't change the image. Skipping them avoids a pointless rebuild that Watchtower
+    # would then redeploy — a few seconds of downtime on a live site for a docs-only commit.
+    paths-ignore: ["renovate.json", "**.md"]
   # Lets `rebuild-all-apps.sh` force a rebuild (e.g. to roll out an urgent platform fix immediately
   # instead of waiting for a Renovate bump PR).
   workflow_dispatch:

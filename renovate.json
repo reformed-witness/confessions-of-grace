@@ -7,6 +7,12 @@
       "matchPackageNames": ["net.thebennett.platform:**"],
       "groupName": "bennett platform",
       "automerge": true
+    },
+    {
+      "description": "Stay on Testcontainers 1.x. 2.0 renamed the module artifacts (postgresql, junit-jupiter), so the major bump doesn't just fail the build — its POM won't even parse. Revisit deliberately, not via a bot PR.",
+      "matchPackageNames": ["org.testcontainers:**"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ],
   "vulnerabilityAlerts": {
