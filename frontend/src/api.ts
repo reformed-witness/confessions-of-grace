@@ -20,6 +20,19 @@ export function getPosts(params: { tag?: string; author?: string } = {}): Promis
   return api.get<PostSummary[]>(`/posts${q ? `?${q}` : ''}`);
 }
 export const getPost = (slug: string) => api.get<PostDetail>(`/posts/${encodeURIComponent(slug)}`);
+
+/** Searching is done by the database, over post bodies too — not by filtering a downloaded list. */
+export const searchPosts = (q: string) =>
+  api.get<PostSummary[]>(`/posts/search?q=${encodeURIComponent(q)}`);
+
+export interface HomePage {
+  featured: PostSummary | null;
+  posts: PostSummary[];
+  recent: PostSummary[];
+  tags: TagCount[];
+}
+/** One call for the whole front page; which post leads is the backend's decision. */
+export const getHome = () => api.get<HomePage>('/home');
 export const getTags = () => api.get<TagCount[]>('/tags');
 export const getAuthors = () => api.get<AuthorSummary[]>('/authors');
 export const getAuthor = (name: string) => api.get<AuthorPage>(`/authors/${encodeURIComponent(name)}`);

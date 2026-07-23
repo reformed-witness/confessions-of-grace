@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { getPosts, getTags } from '../api';
+import { getHome } from '../api';
 import { useAsync } from '../lib/useAsync';
 import PostCard from '../components/PostCard';
 import Sidebar from '../components/Sidebar';
 
 export default function HomePage() {
-  const { data: posts, loading } = useAsync(() => getPosts(), []);
-  const { data: tags } = useAsync(() => getTags(), []);
-  const list = posts ?? [];
-  const featured = list[0];
+  // One call. Which post leads, what counts as recent, and the tag counts are all decided by the
+  // backend — this page used to take element zero of the post list and call it "the latest".
+  const { data, loading } = useAsync(() => getHome(), []);
+  const featured = data?.featured ?? null;
 
   return (
     <div className="flex flex-col gap-8 md:flex-row">
@@ -53,9 +53,9 @@ export default function HomePage() {
           <h2 className="mb-6 border-b border-primary-200 pb-2 text-2xl font-bold">Recent Posts</h2>
           {loading && <p className="text-primary-500">Loading…</p>}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {list.slice(1).map((post) => <PostCard key={post.slug} post={post} />)}
+            {(data?.posts ?? []).map((post) => <PostCard key={post.slug} post={post} />)}
           </div>
-          {!loading && list.length === 0 && <p className="text-primary-500">No posts yet.</p>}
+          {!loading && !featured && <p className="text-primary-500">No posts yet.</p>}
         </div>
 
         <div className="mt-12 text-center">
@@ -64,7 +64,7 @@ export default function HomePage() {
       </main>
 
       <div className="md:w-1/3">
-        <Sidebar recentPosts={list.slice(0, 5)} tags={tags ?? []} />
+        <Sidebar recentPosts={data?.recent ?? []} tags={data?.tags ?? []} />
       </div>
     </div>
   );

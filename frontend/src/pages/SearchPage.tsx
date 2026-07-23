@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getPosts } from '../api';
+import { searchPosts } from '../api';
 import { useAsync } from '../lib/useAsync';
 import PostCard from '../components/PostCard';
 
@@ -8,15 +8,11 @@ export default function SearchPage() {
   const [params, setParams] = useSearchParams();
   const q = params.get('q') ?? '';
   const [term, setTerm] = useState(q);
-  const { data: posts, loading } = useAsync(() => getPosts(), []);
 
-  const needle = q.trim().toLowerCase();
-  const results = (posts ?? []).filter((p) =>
-    !needle
-    || p.title.toLowerCase().includes(needle)
-    || p.excerpt.toLowerCase().includes(needle)
-    || p.author.toLowerCase().includes(needle)
-    || p.tags.some((t) => t.toLowerCase().includes(needle)));
+  // The database does the matching — including post bodies, which the old browser-side filter
+  // never had, and without shipping every post to every visitor who opens this page.
+  const { data: results, loading } = useAsync(() => searchPosts(q), [q]);
+  const found = results ?? [];
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -36,13 +32,13 @@ export default function SearchPage() {
       </form>
 
       {loading && <p className="text-primary-500">Loading…</p>}
-      {!loading && needle && (
+      {!loading && q.trim() && (
         <p className="mb-6 text-primary-600">
-          {results.length} {results.length === 1 ? 'result' : 'results'} for &ldquo;{q}&rdquo;
+          {found.length} {found.length === 1 ? 'result' : 'results'} for &ldquo;{q}&rdquo;
         </p>
       )}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {results.map((post) => <PostCard key={post.slug} post={post} />)}
+        {found.map((post) => <PostCard key={post.slug} post={post} />)}
       </div>
     </div>
   );
