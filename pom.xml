@@ -7,13 +7,13 @@
     <parent>
         <groupId>net.thebennett.platform</groupId>
         <artifactId>platform-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
         <relativePath/>
     </parent>
 
     <groupId>net.reformedwitness</groupId>
     <artifactId>confessions-of-grace</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>Confessions of Grace</name>
     <description>Reformed devotional site — posts, authors, comments, subscriptions — on the Bennett platform.</description>
 
@@ -26,7 +26,7 @@
             <dependency>
                 <groupId>net.thebennett.platform</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>0.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -39,6 +39,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Platform releases live in the Gitea Maven registry (anonymous read). Declared here so Renovate
+         can discover new platform versions and open a bump PR. Maven still needs this repo in
+         settings.xml for PARENT resolution (see .gitea/ci-settings.xml). -->
+    <repositories>
+        <repository>
+            <id>gitea</id>
+            <url>https://git.thebennett.net/api/packages/austin/maven</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
