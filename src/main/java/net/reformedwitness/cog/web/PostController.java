@@ -12,15 +12,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 import net.reformedwitness.cog.domain.Post;
 import net.reformedwitness.cog.repo.PostRepository;
+import net.reformedwitness.cog.service.SearchService;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
 
     private final PostRepository posts;
+    private final SearchService search;
 
-    public PostController(PostRepository posts) {
+    public PostController(PostRepository posts, SearchService search) {
         this.posts = posts;
+        this.search = search;
     }
 
     @GetMapping
@@ -35,6 +38,15 @@ public class PostController {
             result = posts.findByPublishedTrueOrderByPublishedOnDescIdDesc();
         }
         return result.stream().map(Dto::summary).toList();
+    }
+
+    /**
+     * @param q what the reader typed; a term shorter than two characters returns nothing rather than
+     *          the whole site
+     */
+    @GetMapping("/search")
+    public List<Dto.PostSummary> search(@RequestParam(required = false, defaultValue = "") String q) {
+        return search.search(q).stream().map(Dto::summary).toList();
     }
 
     @GetMapping("/{slug}")

@@ -6,23 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.reformedwitness.cog.repo.PostRepository;
+import net.reformedwitness.cog.service.TagService;
 
 @RestController
 @RequestMapping("/api/tags")
 public class TagController {
 
-    private final PostRepository posts;
+    private final TagService tags;
 
-    public TagController(PostRepository posts) {
-        this.posts = posts;
+    public TagController(TagService tags) {
+        this.tags = tags;
     }
 
     /** All tags used by published posts, with counts. */
     @GetMapping
     public List<Dto.TagCount> list() {
-        return posts.tagCounts().stream()
-                .map(row -> new Dto.TagCount((String) row[0], ((Number) row[1]).longValue()))
-                .toList();
+        return tags.counts().stream().map(t -> new Dto.TagCount(t.tag(), t.count())).toList();
     }
 }
