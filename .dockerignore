@@ -1,9 +1,8 @@
-node_modules
-.next
-.git
-.env
-.env.local
-Dockerfile
-.dockerignore
-README.md
-node-*
+target/
+frontend/node_modules/
+frontend/dist/
+_content/
+.git/
+.idea/
+*.iml
+.vscode/
